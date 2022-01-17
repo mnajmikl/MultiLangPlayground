@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 {
     printf_s("132 = %s\n", binnum(132));
     printf_s("133 = %s\n", binnum(133));
-	return 0;
+    return 0;
 }
 
 char* binnum(int decimal)
