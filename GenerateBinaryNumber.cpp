@@ -1,5 +1,4 @@
-// GenerateBinaryNumber.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// GenerateBinaryNumber.cpp
 
 #include <cstdlib>
 #include <iostream>
@@ -98,7 +97,6 @@ void generatebinarynumber2(int decimal)
     /*
      * 1. Store the remainder of decimal division by 2
      * 2. Divide the decimal using integer division by 2
-     *    The result is the reversed version of the binary number
      */
     while (decimal > 0)
     {
@@ -108,7 +106,7 @@ void generatebinarynumber2(int decimal)
     }
 
     /*
-     * Print the array from above in reverse
+     * Print the array from above
      */
     for (int i = 0; i < length; i++)
     {
