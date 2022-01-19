@@ -9,15 +9,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char* binary(int);
-char* oct(int);
-char* hex(int);
+char* binary(unsigned int);
+char* oct(unsigned int);
+char* hex(unsigned int);
 
 int main(int argc, char** argv)
 {
-	printf_s("32 = bin(0x%s)\n", binary(32));
-	printf_s("32 = oct(0x%s)\n", oct(32));
-	printf_s("32 = hex(0x%s)", hex(32));
+	printf_s("255 = bin(0x%s)\n", binary(255));
+	printf_s("255 = oct(0x%s)\n", oct(255));
+	printf_s("255 = hex(0x%s)", hex(255));
 	return 0;
 }
 
@@ -26,10 +26,10 @@ int main(int argc, char** argv)
  @param decimal The decimal number to be converted
  @result A binary number of the given decimal number
 */
-char* binary(int decimal)
+char* binary(unsigned int decimal)
 {
 	int length = 0;
-	int decimal_copy = decimal;
+	unsigned int decimal_copy = decimal;
 	char* binnumbers = "01";
 
 	while (decimal_copy > 0)
@@ -38,7 +38,7 @@ char* binary(int decimal)
 		length++;
 	}
 
-	char* outnumber = (char*)calloc(length, sizeof(char*));
+	char* outnumber = (char*)calloc(length, sizeof(char));
 	
 	if (outnumber == NULL)
 	{
@@ -63,10 +63,10 @@ char* binary(int decimal)
  @param decimal The decimal number to be converted
  @result A octal number of the given decimal number
 */
-char* oct(int decimal)
+char* oct(unsigned int decimal)
 {
 	int length = 0;
-	int decimal_copy = decimal;
+	unsigned int decimal_copy = decimal;
 	char* octnumbers = "01234567";
 
 	while (decimal_copy > 0)
@@ -75,7 +75,7 @@ char* oct(int decimal)
 		length++;
 	}
 
-	char* outnumber = (char*)calloc(length, sizeof(char*));
+	char* outnumber = (char*)calloc(length, sizeof(char));
 
 	if (outnumber == NULL)
 	{
@@ -100,10 +100,10 @@ char* oct(int decimal)
  @param decimal The decimal number to be converted
  @result A hexadecimal number of the given decimal number
 */
-char* hex(int decimal)
+char* hex(unsigned int decimal)
 {
 	int length = 0;
-	int decimal_copy = decimal;
+	unsigned int decimal_copy = decimal;
 	char* hexnumbers = "0123456789ABCDEF";
 
 	while (decimal_copy > 0)
@@ -112,7 +112,7 @@ char* hex(int decimal)
 		length++;
 	}
 
-	char* outnumber = (char*)calloc(length, sizeof(char*));
+	char* outnumber = (char*)calloc(length, sizeof(char));
 
 	if (outnumber == NULL)
 	{
