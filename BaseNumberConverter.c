@@ -9,9 +9,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char* binary(unsigned int);
-char* oct(unsigned int);
-char* hex(unsigned int);
+unsigned int getnumberlength(unsigned int, unsigned int);
+const char* getbasenumber(unsigned int, unsigned int, 
+								unsigned int, const char*);
+const char* binary(unsigned int);
+const char* oct(unsigned int);
+const char* hex(unsigned int);
 
 int main(int argc, char** argv)
 {
@@ -22,40 +25,62 @@ int main(int argc, char** argv)
 }
 
 /*!
- @function binary
+ @function getnumberlength
  @param decimal The decimal number to be converted
+ @param base The base of the number
  @result A binary number of the given decimal number
 */
-char* binary(unsigned int decimal)
+unsigned int getnumberlength(unsigned int decimal, unsigned int base)
 {
-	int length = 0;
-	unsigned int decimal_copy = decimal;
-	char* binnumbers = "01";
-
-	while (decimal_copy > 0)
+	unsigned int length = 0;
+	while (decimal > 0)
 	{
-		decimal_copy = decimal_copy / 2;
+		decimal = decimal / base;
 		length++;
 	}
+	return length;
+}
 
+/*!
+ @function getbasenumber
+ @param decimal The decimal number to be converted
+ @param base The base of the number
+ @param length The length  of the base number
+ @param numbers The numbers in the base number given
+ @result A binary number of the given decimal number
+*/
+const char* getbasenumber(unsigned int decimal, unsigned int base,
+							unsigned int length, const char* numbers)
+{
 	char* outnumber = (char*)calloc(length, sizeof(char));
-	
+
 	if (outnumber == NULL)
 	{
 		printf_s("Cannot allocate memory");
-		exit(0);
+		return '\0';
 	}
 
 	int length_copy = length - 1;
 
 	while (decimal > 0)
 	{
-		*(outnumber + length_copy) = binnumbers[decimal % 2];
-		decimal = decimal / 2;
+		*(outnumber + length_copy) = numbers[decimal % base];
+		decimal = decimal / base;
 		length_copy--;
 	}
 
 	return outnumber;
+}
+
+/*!
+ @function binary
+ @param decimal The decimal number to be converted
+ @result A binary number of the given decimal number
+*/
+const char* binary(unsigned int decimal)
+{
+	unsigned int length = getnumberlength(decimal, 2);
+	return getbasenumber(decimal, 2, length, "01");
 }
 
 /*!
@@ -63,36 +88,10 @@ char* binary(unsigned int decimal)
  @param decimal The decimal number to be converted
  @result A octal number of the given decimal number
 */
-char* oct(unsigned int decimal)
+const char* oct(unsigned int decimal)
 {
-	int length = 0;
-	unsigned int decimal_copy = decimal;
-	char* octnumbers = "01234567";
-
-	while (decimal_copy > 0)
-	{
-		decimal_copy = decimal_copy / 8;
-		length++;
-	}
-
-	char* outnumber = (char*)calloc(length, sizeof(char));
-
-	if (outnumber == NULL)
-	{
-		printf_s("Cannot allocate memory");
-		exit(0);
-	}
-
-	int length_copy = length - 1;
-
-	while (decimal > 0)
-	{
-		*(outnumber + length_copy) = octnumbers[decimal % 8];
-		decimal = decimal / 8;
-		length_copy--;
-	}
-
-	return outnumber;
+	unsigned int length = getnumberlength(decimal, 8);
+	return getbasenumber(decimal, 8, length, "01234567");
 }
 
 /*!
@@ -100,34 +99,8 @@ char* oct(unsigned int decimal)
  @param decimal The decimal number to be converted
  @result A hexadecimal number of the given decimal number
 */
-char* hex(unsigned int decimal)
+const char* hex(unsigned int decimal)
 {
-	int length = 0;
-	unsigned int decimal_copy = decimal;
-	char* hexnumbers = "0123456789ABCDEF";
-
-	while (decimal_copy > 0)
-	{
-		decimal_copy = decimal_copy / 16;
-		length++;
-	}
-
-	char* outnumber = (char*)calloc(length, sizeof(char));
-
-	if (outnumber == NULL)
-	{
-		printf_s("Cannot allocate memory");
-		exit(0);
-	}
-
-	int length_copy = length - 1;
-
-	while (decimal > 0)
-	{
-		*(outnumber + length_copy) = hexnumbers[decimal % 16];
-		decimal = decimal / 16;
-		length_copy--;
-	}
-
-	return outnumber;
+	unsigned int length = getnumberlength(decimal, 16);
+	return getbasenumber(decimal, 16, length, "0123456789ABCDEF");
 }
