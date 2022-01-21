@@ -17,8 +17,8 @@ const char* hexadecimal(unsigned int);
 int main(int argc, char** argv)
 {
 	printf_s("255 = binary(0x%s)\n", binary(255));
-	printf_s("255 = octal(0x%s)\n", oct(255));
-	printf_s("255 = hexdecimal(0x%s)", hex(255));
+	printf_s("255 = octal(0x%s)\n", octal(255));
+	printf_s("255 = hexdecimal(0x%s)", hexadecimal(255));
 	return 0;
 }
 
