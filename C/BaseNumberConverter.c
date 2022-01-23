@@ -2,7 +2,7 @@
  * Base number converter
  * Convert decimal to binary/octal/hexadecimal number
  * 
- * Author: Mohamamd Najmi Bin Bachok
+ * Author: Mohammad Najmi Bin Bachok
  * Version: 1.0.0
  */
 
