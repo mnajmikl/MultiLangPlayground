@@ -1,6 +1,7 @@
 """
 # Generate decimal to binary/octal/hexadecimal number
 # Author: Mohammad Najmi
+# Version: 1.0.0
 """
 
 def basenumberconverter(dec, base, numbers):
