@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ *  Base Number Converter
+ *
+ * @version 1.0.0
+ * @author Mohammad Najmi
+ */
+
+using System;
 
 public static class Program
 {
