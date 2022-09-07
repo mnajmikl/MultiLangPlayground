@@ -36,12 +36,12 @@ void setdata(int** d, int rows, int columns)
 	}
 }
 
-struct Matrix* TransposeMatrix( struct Matrix* source, int newrows, int newcols)
+struct Matrix* TransposeMatrix(struct Matrix* source)
 {
 	struct Matrix* m = (struct Matrix *) malloc(sizeof(struct Matrix));
-	m->rows = newrows;
-	m->columns = newcols;
-	m->matrixdata = initdata(newrows, newcols);
+	m->rows = source->columns;
+	m->columns = source->rows;
+	m->matrixdata = initdata(source->columns, source->rows);
 	for (int r = 0; r < source->columns; r++)
 	{
 		for (int c = 0; c < source->rows; c++)
@@ -77,7 +77,7 @@ int main()
 	printf("Original matrix [%d,%2d]\n", original.rows, original.columns);
 	printmatrix(original.matrixdata, original.rows, original.columns);
 	
-	struct Matrix* m = TransposeMatrix(&original, cols, rows);
+	struct Matrix* m = TransposeMatrix(&original);
 	printf("\nTransposed matrix [%d,%2d]\n", m->rows, m->columns);
 	printmatrix(m->matrixdata, m->rows, m->columns);
 	
