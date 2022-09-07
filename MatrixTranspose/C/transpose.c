@@ -25,21 +25,6 @@ int** initdata(int rows, int columns)
 	return data;
 }
 
-/*
-int** setdata(int rows, int columns)
-{
-	int** data = initdata(rows, columns);
-	for (int r = 0; r < rows; r++)
-	{
-		for (int c = 0; c < columns; c++)
-		{
-			data[r][c] = columns * r + c;
-		}
-	}
-	return data;
-}
-*/
-
 void setdata(int** d, int rows, int columns)
 {
 	for (int r = 0; r < rows; r++)
