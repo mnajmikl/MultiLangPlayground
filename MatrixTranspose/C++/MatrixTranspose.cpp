@@ -37,7 +37,6 @@ struct Matrix
 	}
 };
 
-// Matrix* TransposeMatrix(Matrix* source, int newrows, int newcols)
 Matrix* TransposeMatrix(Matrix* source)
 {
 	Matrix* m = new Matrix(source->columns, source->rows);
