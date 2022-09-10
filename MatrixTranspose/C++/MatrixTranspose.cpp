@@ -1,87 +1,84 @@
 #include <iostream>
 #include <iomanip>
 
-int** initdata(int rows, int columns)
-{
-	int** data = new int*[rows]();
-	for (int i = 0; i < rows; i++)
-	{
-		data[i] = new int[columns]();
-	}
-	return data;
-}
-
-void setdata(int** d, int rows, int columns)
-{
-	for (int r = 0; r < rows; r++)
-	{
-		for (int c = 0; c < columns; c++)
-		{
-			d[r][c] = columns * r + c;
-		}
-	}
-}
-
 struct Matrix
 {
-	int rows;
-	int columns;
-	int** matrixdata;
-	Matrix(int r, int c) : rows (r), columns(c)	
-	{
-		this->matrixdata = initdata(r, c);
-	}
-	Matrix(int r, int c, int** d) : rows (r), columns(c)	
-	{
-		this->matrixdata = d;
-	}
+    int rows;
+    int columns;
+    int** matrixdata;
+    Matrix(int r, int c) : rows (r), columns(c)
+    {
+        this->matrixdata = new int*[r]();
+        for (int i = 0; i < r; i++)
+        {
+            this->matrixdata[i] = new int[c]();
+        }
+    }
+    ~Matrix()
+    {
+        for (int i = 0; i < this->rows; i++)
+        {
+            delete[] this->matrixdata[i];
+        }
+        delete[] this->matrixdata;
+    }
+    void setdata()
+    {
+        for (int r = 0; r < this->rows; r++)
+        {
+            for (int c = 0; c < this->columns; c++)
+            {
+                this->matrixdata[r][c] = this->columns * r + c;
+            }
+        }
+    }
 };
 
 Matrix* TransposeMatrix(Matrix* source)
 {
-	Matrix* m = new Matrix(source->columns, source->rows);
-	for (int r = 0; r < source->columns; r++)
-	{
-		for (int c = 0; c < source->rows; c++)
-		{
-			m->matrixdata[r][c] = source->matrixdata[c][r];
-		}
-	}
-	return m;
+    Matrix* m = new Matrix(source->columns, source->rows);
+    for (int r = 0; r < source->columns; r++)
+    {
+        for (int c = 0; c < source->rows; c++)
+        {
+            m->matrixdata[r][c] = source->matrixdata[c][r];
+        }
+    }
+    return m;
 }
 
 void printmatrix(int** data, int rows, int columns)
 {
-	for (int r = 0; r < rows ; r++)
-	{
-		for (int c = 0; c < columns; c++)
-		{
-			std::cout << std::setw(2) << data[r][c] << " ";
-		}
-		std::cout << std::endl;
-	}
+    for (int r = 0; r < rows ; r++)
+    {
+        for (int c = 0; c < columns; c++)
+        {
+            std::cout << std::setw(2) << data[r][c] << " ";
+        }
+        std::cout << std::endl;
+    }
 }
 
 int main()
 {
-	const int rows = 6;
-	const int cols = 8;
-	
-	Matrix original {rows, cols};
-	setdata(original.matrixdata, rows, cols);
-	std::cout << "Original matrix [" << original.rows << ", " << original.columns <<"]\n";
-	printmatrix(original.matrixdata, original.rows, original.columns);
-	
-	Matrix* m = TransposeMatrix(&original);
-	std::cout << "\nTransposed matrix [" << m->rows << ", " << m->columns <<"]\n";
-	printmatrix(m->matrixdata, m->rows, m->columns);
-	
-	setdata(m->matrixdata, m->rows, m->columns);
-	std::cout << "\nAfter resetting data\nTransposed matrix [" << m->rows << ", " << m->columns <<"]\n";
-	printmatrix(m->matrixdata, m->rows, m->columns);
-	
-	delete m;
-	return 0;
+    const int rows = 6;
+    const int cols = 8;
+
+    Matrix original {rows, cols};
+    original.setdata();
+    std::cout << "Original matrix [" << original.rows << ", " << original.columns <<"]\n";
+    printmatrix(original.matrixdata, original.rows, original.columns);
+
+    Matrix* m = TransposeMatrix(&original);
+    std::cout << "\nTransposed matrix [" << m->rows << ", " << m->columns <<"]\n";
+    printmatrix(m->matrixdata, m->rows, m->columns);
+
+    m->setdata();
+    std::cout << "\nAfter resetting data\nTransposed matrix [" << m->rows << ", " << m->columns <<"]\n";
+    printmatrix(m->matrixdata, m->rows, m->columns);
+
+    delete m;
+    return 0;
 }
 
 ///
@@ -109,7 +106,7 @@ int main()
 // Original rows = 2, columns = 3
 // 0,0 0,1 0,2
 // 1,0 1,1 1,2
-// 
+//
 // Transposed rows = 3, columns = 2
 // 0,0 0,1
 // 1,0 1,1
