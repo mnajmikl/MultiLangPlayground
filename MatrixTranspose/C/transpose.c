@@ -85,7 +85,6 @@ int main()
 	printf("\nAfter resetting data\nTransposed matrix [%d,%2d]\n", m->rows, m->columns);
 	printmatrix(m->matrixdata, m->rows, m->columns);
 	
-	free(m);
 	return 0;
 }
 
