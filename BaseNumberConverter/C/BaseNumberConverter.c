@@ -9,10 +9,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-const char* basenumber(unsigned int, unsigned int, const char*);
-const char* binary(unsigned int);
-const char* octal(unsigned int);
-const char* hexadecimal(unsigned int);
+char* basenumber(unsigned int, unsigned int, const char*);
+char* binary(unsigned int);
+char* octal(unsigned int);
+char* hexadecimal(unsigned int);
 
 int main(int argc, char** argv)
 {
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
  @param numbers: The numbers in the base number given
  @result A number in the specified base of the given decimal number
 */
-const char* basenumber(unsigned int decimal, unsigned int base, const char* numbers)
+char* basenumber(unsigned int decimal, unsigned int base, const char* numbers)
 {
 	unsigned int length = 0;
 	unsigned int decimal_copy = decimal;
@@ -65,7 +65,7 @@ const char* basenumber(unsigned int decimal, unsigned int base, const char* numb
  @param decimal: The decimal number to be converted
  @result A binary number of the given decimal number
 */
-const char* binary(unsigned int decimal)
+char* binary(unsigned int decimal)
 {
 	return basenumber(decimal, 2, "01");
 }
@@ -75,7 +75,7 @@ const char* binary(unsigned int decimal)
  @param decimal: The decimal number to be converted
  @result A octal number of the given decimal number
 */
-const char* octal(unsigned int decimal)
+char* octal(unsigned int decimal)
 {
 	return basenumber(decimal, 8, "01234567");
 }
@@ -85,7 +85,7 @@ const char* octal(unsigned int decimal)
  @param decimal: The decimal number to be converted
  @result A hexadecimal number of the given decimal number
 */
-const char* hexadecimal(unsigned int decimal)
+char* hexadecimal(unsigned int decimal)
 {
 	return basenumber(decimal, 16, "0123456789ABCDEF");
 }
