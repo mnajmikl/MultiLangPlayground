@@ -1,24 +1,31 @@
 /*
  * Base number converter
  * Convert decimal to binary/octal/hexadecimal number
- * 
+ *
  * Author: Mohammad Najmi Bin Bachok
  * Version: 1.0.0
  */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 char* basenumber(unsigned int, unsigned int, const char*);
 char* binary(unsigned int);
 char* octal(unsigned int);
 char* hexadecimal(unsigned int);
 
-int main(int argc, char** argv)
+int main()
 {
-	printf_s("255 = binary(0x%s)\n", binary(255));
-	printf_s("255 = octal(0x%s)\n", octal(255));
-	printf_s("255 = hexdecimal(0x%s)", hexadecimal(255));
+    char* b = binary(255);
+    char* o = octal(255);
+    char* h = hexadecimal(255);
+	printf("255 = binary(0x%s)\n", b);
+	printf("255 = octal(0x%s)\n", o);
+	printf("255 = hexdecimal(0x%s)\n", h);
+	free(b);
+	free(o);
+	free(h);
 	return 0;
 }
 
@@ -33,30 +40,21 @@ char* basenumber(unsigned int decimal, unsigned int base, const char* numbers)
 {
 	unsigned int length = 0;
 	unsigned int decimal_copy = decimal;
-
 	while (decimal > 0)
 	{
 		decimal = decimal / base;
 		length++;
 	}
+	char* outnumber = calloc(length + 1, sizeof(char));
 
-	char* outnumber = (char*)calloc(length, sizeof(char));
-
-	if (outnumber == NULL)
-	{
-		printf_s("Cannot allocate memory");
-		return '\0';
-	}
-
+	if (outnumber == NULL) return NULL;
 	length--;
-
 	while (decimal_copy > 0)
 	{
-		*(outnumber + length) = numbers[decimal_copy % base];
+		outnumber[length] = numbers[decimal_copy % base];
 		decimal_copy = decimal_copy / base;
 		length--;
 	}
-
 	return outnumber;
 }
 
@@ -67,7 +65,7 @@ char* basenumber(unsigned int decimal, unsigned int base, const char* numbers)
 */
 char* binary(unsigned int decimal)
 {
-	return basenumber(decimal, 2, "01");
+    return basenumber(decimal, 2, "01");
 }
 
 /*!
@@ -87,5 +85,5 @@ char* octal(unsigned int decimal)
 */
 char* hexadecimal(unsigned int decimal)
 {
-	return basenumber(decimal, 16, "0123456789ABCDEF");
+	return  basenumber(decimal, 16, "0123456789ABCDEF");
 }
