@@ -20,13 +20,13 @@ int main()
     char* b = binary(255);
     char* o = octal(255);
     char* h = hexadecimal(255);
-	printf("255 = binary(0x%s)\n", b);
-	printf("255 = octal(0x%s)\n", o);
-	printf("255 = hexdecimal(0x%s)\n", h);
-	free(b);
-	free(o);
-	free(h);
-	return 0;
+    printf("255 = binary(0x%s)\n", b);
+    printf("255 = octal(0x%s)\n", o);
+    printf("255 = hexdecimal(0x%s)\n", h);
+    free(b);
+    free(o);
+    free(h);
+    return 0;
 }
 
 /*!
@@ -38,24 +38,23 @@ int main()
 */
 char* basenumber(unsigned int decimal, unsigned int base, const char* numbers)
 {
-	unsigned int length = 0;
-	unsigned int decimal_copy = decimal;
-	while (decimal > 0)
-	{
-		decimal = decimal / base;
-		length++;
-	}
-	char* outnumber = calloc(length + 1, sizeof(char));
-
-	if (outnumber == NULL) return NULL;
-	length--;
-	while (decimal_copy > 0)
-	{
-		outnumber[length] = numbers[decimal_copy % base];
-		decimal_copy = decimal_copy / base;
-		length--;
-	}
-	return outnumber;
+    unsigned int length = 0;
+    unsigned int decimal_copy = decimal;
+    while (decimal > 0)
+    {
+        decimal = decimal / base;
+        length++;
+    }
+    char* outnumber = calloc(length + 1, sizeof(char));
+    if (outnumber == NULL) return NULL;
+    length--;
+    while (decimal_copy > 0)
+    {
+        outnumber[length] = numbers[decimal_copy % base];
+        decimal_copy = decimal_copy / base;
+        length--;
+    }
+    return outnumber;
 }
 
 /*!
@@ -75,7 +74,7 @@ char* binary(unsigned int decimal)
 */
 char* octal(unsigned int decimal)
 {
-	return basenumber(decimal, 8, "01234567");
+    return basenumber(decimal, 8, "01234567");
 }
 
 /*!
@@ -85,5 +84,5 @@ char* octal(unsigned int decimal)
 */
 char* hexadecimal(unsigned int decimal)
 {
-	return  basenumber(decimal, 16, "0123456789ABCDEF");
+    return  basenumber(decimal, 16, "0123456789ABCDEF");
 }
